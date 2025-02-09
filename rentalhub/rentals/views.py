@@ -41,3 +41,11 @@ class RentalViewSet(viewsets.ModelViewSet):
         """Endpoint dla admina – zwraca liczbę wypożyczeń na sprzęt"""
         summary = Rental.objects.values('equipment__name').annotate(total=Count('id'))
         return Response(summary)
+
+from django.shortcuts import render
+import requests
+
+def equipment_list(request):
+    response = requests.get('http://127.0.0.1:8000/api/equipment/')
+    equipment = response.json()  # Pobiera dane z API
+    return render(request, 'rentals/equipment_list.html', {'equipment_list': equipment})

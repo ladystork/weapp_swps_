@@ -15,3 +15,10 @@ urlpatterns += [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
+from django.urls import path
+from .views import equipment_list
+
+urlpatterns = [
+    path('equipment/', equipment_list, name='equipment_list'),
+]
